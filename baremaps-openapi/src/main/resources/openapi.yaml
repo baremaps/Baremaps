@@ -445,7 +445,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/tileSet'
+              $ref: '#/components/schemas/tileJSON'
   '/tilesets/{tilesetId}':
     get:
       tags:
@@ -465,7 +465,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/tileSet'
+                $ref: '#/components/schemas/tileJSON'
         '404':
           description: |-
             tileset not found
@@ -486,7 +486,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/tileSet'
+              $ref: '#/components/schemas/tileJSON'
       responses:
         '204':
           description: |-
@@ -865,7 +865,7 @@ components:
         layers:
           type: array
           items:
-            $ref: '#/components/schemas/layers-array'
+            $ref: '#/components/schemas/mb-layer'
         center:
           type: array
           items:
@@ -874,7 +874,7 @@ components:
           type: object
         zoom:
           type: number
-    layers-array:
+    mb-layer:
       required:
         - id
         - type
@@ -913,34 +913,6 @@ components:
           type: number
         paint:
           type: object
-    mb-sprite-index:
-      type: object
-      additionalProperties:
-        $ref: '#/components/schemas/mb-sprite-index-symbol'
-    mb-sprite-index-symbol:
-      type: object
-      required:
-        - width
-        - height
-        - x
-        - 'y'
-        - pixelRatio
-      properties:
-        width:
-          type: integer
-          example: 32
-        height:
-          type: integer
-          example: 32
-        x:
-          type: integer
-          example: 0
-        y:
-          type: integer
-          example: 0
-        pixelRatio:
-          type: number
-          example: 1
     style-set:
       type: object
       required:
@@ -996,31 +968,7 @@ components:
           minItems: 1
           items:
             $ref: '#/components/schemas/link'
-    stylesheet:
-      type: object
-      nullable: true
-      required:
-        - link
-      properties:
-        title:
-          type: string
-          nullable: true
-        version:
-          type: string
-          nullable: true
-        specification:
-          type: string
-          format: url
-          nullable: true
-        native:
-          type: boolean
-          nullable: true
-        tilingScheme:
-          type: string
-          nullable: true
-        link:
-          $ref: '#/components/schemas/link'
-    tileSet:
+    tileJSON:
       type: object
       required:
         - tilejson
@@ -1076,8 +1024,8 @@ components:
         vector_layers:
           type: array
           items:
-            $ref: '#/components/schemas/layer'
-    layer:
+            $ref: '#/components/schemas/vector_layer'
+    vector_layer:
       type: object
       properties:
         id:

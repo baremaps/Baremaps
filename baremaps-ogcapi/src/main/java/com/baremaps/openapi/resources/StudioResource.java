@@ -26,7 +26,7 @@ import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.core.qualifier.QualifiedType;
 import org.jdbi.v3.json.Json;
 
-public class MapsResource implements MapsApi {
+public class StudioResource implements MapsApi {
 
   private static final QualifiedType<MapMetadata> MAP =
       QualifiedType.of(MapMetadata.class).with(Json.class);
@@ -34,7 +34,7 @@ public class MapsResource implements MapsApi {
   private final Jdbi jdbi;
 
   @Inject
-  public MapsResource(Jdbi jdbi) {
+  public StudioResource(Jdbi jdbi) {
     this.jdbi = jdbi;
   }
 

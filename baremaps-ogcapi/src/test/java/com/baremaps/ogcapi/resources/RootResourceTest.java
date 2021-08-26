@@ -12,7 +12,7 @@
  * the License.
  */
 
-package com.baremaps.openapi.services;
+package com.baremaps.ogcapi.resources;
 
 import static org.junit.Assert.assertEquals;
 

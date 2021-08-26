@@ -35,11 +35,11 @@ import javax.ws.rs.core.UriInfo;
 
 @Singleton
 @Path("")
-public class ApiListingResource {
+public class ApiResource {
 
   private static final String OPENAPI = "openapi.yaml";
 
-  public ApiListingResource() {}
+  public ApiResource() {}
 
   public String getVersion() {
     try (InputStream input = Resources.getResource("version.txt").openStream()) {

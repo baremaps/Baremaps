@@ -18,7 +18,7 @@ import static org.junit.Assert.assertEquals;
 
 import com.baremaps.model.MbStyle;
 import com.baremaps.model.StyleSet;
-import com.baremaps.openapi.resources.StylesService;
+import com.baremaps.openapi.resources.StylesResource;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -33,7 +33,7 @@ import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.jackson2.Jackson2Plugin;
 import org.junit.Test;
 
-public class StylesServiceTest extends JerseyTest {
+public class StylesResourceTest extends JerseyTest {
 
   Jdbi jdbi;
 
@@ -57,7 +57,7 @@ public class StylesServiceTest extends JerseyTest {
 
     // Configure the service
     return new ResourceConfig()
-        .register(StylesService.class)
+        .register(StylesResource.class)
         .register(
             new AbstractBinder() {
               @Override

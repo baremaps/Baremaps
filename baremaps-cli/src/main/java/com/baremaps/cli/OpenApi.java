@@ -17,12 +17,12 @@ package com.baremaps.cli;
 import static io.servicetalk.data.jackson.jersey.ServiceTalkJacksonSerializerFeature.contextResolverFor;
 
 import com.baremaps.openapi.resources.ApiListingResource;
-import com.baremaps.openapi.resources.CollectionsService;
-import com.baremaps.openapi.resources.ConformanceService;
-import com.baremaps.openapi.resources.RootService;
-import com.baremaps.openapi.resources.StylesService;
+import com.baremaps.openapi.resources.CollectionsResource;
+import com.baremaps.openapi.resources.ConformanceResource;
+import com.baremaps.openapi.resources.RootResource;
+import com.baremaps.openapi.resources.StylesResource;
 import com.baremaps.openapi.resources.SwaggerResource;
-import com.baremaps.openapi.resources.TilesetsService;
+import com.baremaps.openapi.resources.TilesetsResource;
 import com.baremaps.postgres.jdbc.PostgresUtils;
 import com.baremaps.server.CorsFilter;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -86,12 +86,12 @@ public class OpenApi implements Callable<Integer> {
             .registerClasses(
                 ApiListingResource.class,
                 SwaggerResource.class,
-                RootService.class,
+                RootResource.class,
                 CorsFilter.class,
-                ConformanceService.class,
-                CollectionsService.class,
-                StylesService.class,
-                TilesetsService.class)
+                ConformanceResource.class,
+                CollectionsResource.class,
+                StylesResource.class,
+                TilesetsResource.class)
             .register(contextResolverFor(mapper))
             .register(
                 new AbstractBinder() {

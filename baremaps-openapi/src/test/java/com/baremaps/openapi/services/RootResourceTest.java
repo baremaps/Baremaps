@@ -17,19 +17,19 @@ package com.baremaps.openapi.services;
 import static org.junit.Assert.assertEquals;
 
 import com.baremaps.model.LandingPage;
-import com.baremaps.openapi.resources.RootService;
+import com.baremaps.openapi.resources.RootResource;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
 import org.glassfish.jersey.test.TestProperties;
 import org.junit.Test;
 
-public class RootServiceTest extends JerseyTest {
+public class RootResourceTest extends JerseyTest {
 
   @Override
   protected ResourceConfig configure() {
     enable(TestProperties.LOG_TRAFFIC);
     enable(TestProperties.DUMP_ENTITY);
-    return new ResourceConfig(RootService.class);
+    return new ResourceConfig(RootResource.class);
   }
 
   @Test

@@ -18,7 +18,7 @@ import static org.junit.Assert.assertEquals;
 
 import com.baremaps.model.MapMetadata;
 import com.baremaps.model.MapsMetadata;
-import com.baremaps.openapi.resources.MapsService;
+import com.baremaps.openapi.resources.MapsResource;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -56,7 +56,7 @@ public class MapsServiceTest extends JerseyTest {
 
     // Configure the service
     return new ResourceConfig()
-        .register(MapsService.class)
+        .register(MapsResource.class)
         .register(
             new AbstractBinder() {
               @Override

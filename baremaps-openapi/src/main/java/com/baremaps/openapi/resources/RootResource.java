@@ -20,7 +20,7 @@ import com.baremaps.model.Link;
 import java.util.Arrays;
 import javax.ws.rs.core.Response;
 
-public class RootService implements DefaultApi {
+public class RootResource implements DefaultApi {
 
   @Override
   public Response getLandingPage() {

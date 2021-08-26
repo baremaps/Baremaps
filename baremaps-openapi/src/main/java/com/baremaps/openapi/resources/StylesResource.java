@@ -29,7 +29,7 @@ import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.core.qualifier.QualifiedType;
 import org.jdbi.v3.json.Json;
 
-public class StylesService implements StylesApi {
+public class StylesResource implements StylesApi {
 
   private static final QualifiedType<MbStyle> MBSTYLE =
       QualifiedType.of(MbStyle.class).with(Json.class);
@@ -37,7 +37,7 @@ public class StylesService implements StylesApi {
   private final Jdbi jdbi;
 
   @Inject
-  public StylesService(Jdbi jdbi) {
+  public StylesResource(Jdbi jdbi) {
     this.jdbi = jdbi;
   }
 

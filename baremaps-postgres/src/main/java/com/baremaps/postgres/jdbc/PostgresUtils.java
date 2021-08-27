@@ -15,6 +15,8 @@
 package com.baremaps.postgres.jdbc;
 
 import com.google.common.io.Resources;
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -22,16 +24,16 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.sql.DataSource;
-import org.apache.commons.dbcp2.BasicDataSource;
 
 public final class PostgresUtils {
 
   private PostgresUtils() {}
 
   public static DataSource datasource(String url) {
-    BasicDataSource datasource = new BasicDataSource();
-    datasource.setUrl(url);
-    return datasource;
+    HikariConfig config = new HikariConfig();
+    config.setJdbcUrl(url);
+    config.setMaximumPoolSize(Runtime.getRuntime().availableProcessors());
+    return new HikariDataSource(config);
   }
 
   public static void executeResource(Connection connection, String resource)

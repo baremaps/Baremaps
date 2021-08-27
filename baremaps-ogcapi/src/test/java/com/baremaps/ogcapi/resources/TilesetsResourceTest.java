@@ -17,7 +17,6 @@ package com.baremaps.ogcapi.resources;
 import static org.junit.Assert.assertEquals;
 
 import com.baremaps.model.TileJSON;
-import com.baremaps.openapi.resources.TilesetsResource;
 import com.baremaps.postgres.jdbc.PostgresUtils;
 import java.util.List;
 import java.util.UUID;

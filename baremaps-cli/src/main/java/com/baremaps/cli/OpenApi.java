@@ -16,13 +16,13 @@ package com.baremaps.cli;
 
 import static io.servicetalk.data.jackson.jersey.ServiceTalkJacksonSerializerFeature.contextResolverFor;
 
-import com.baremaps.openapi.resources.ApiResource;
-import com.baremaps.openapi.resources.CollectionsResource;
-import com.baremaps.openapi.resources.ConformanceResource;
-import com.baremaps.openapi.resources.RootResource;
-import com.baremaps.openapi.resources.StylesResource;
-import com.baremaps.openapi.resources.SwaggerResource;
-import com.baremaps.openapi.resources.TilesetsResource;
+import com.baremaps.ogcapi.resources.ApiResource;
+import com.baremaps.ogcapi.resources.CollectionsResource;
+import com.baremaps.ogcapi.resources.ConformanceResource;
+import com.baremaps.ogcapi.resources.RootResource;
+import com.baremaps.ogcapi.resources.StylesResource;
+import com.baremaps.ogcapi.resources.SwaggerResource;
+import com.baremaps.ogcapi.resources.TilesetsResource;
 import com.baremaps.postgres.jdbc.PostgresUtils;
 import com.baremaps.server.CorsFilter;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;

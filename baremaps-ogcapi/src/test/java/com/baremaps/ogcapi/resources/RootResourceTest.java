@@ -17,7 +17,6 @@ package com.baremaps.ogcapi.resources;
 import static org.junit.Assert.assertEquals;
 
 import com.baremaps.model.LandingPage;
-import com.baremaps.openapi.resources.RootResource;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
 import org.glassfish.jersey.test.TestProperties;

@@ -12,11 +12,10 @@
  * the License.
  */
 
-package com.baremaps.ogcapi.resources;
+package com.baremaps.studio.resources;
 
 import static org.junit.Assert.assertEquals;
 
-import com.baremaps.openapi.resources.StudioResource;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -56,7 +55,8 @@ public class StudioResourceTest extends JerseyTest {
     jdbi.useHandle(handle -> handle.execute("create schema studio"));
     jdbi.useHandle(
         handle ->
-            handle.execute("create table studio.entities (id uuid primary key, entity jsonb, kind text)"));
+            handle.execute(
+                "create table studio.entities (id uuid primary key, entity jsonb, kind text)"));
 
     // Configure the service
     return new ResourceConfig()

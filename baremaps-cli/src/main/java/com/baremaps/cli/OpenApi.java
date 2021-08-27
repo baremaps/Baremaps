@@ -25,6 +25,7 @@ import com.baremaps.ogcapi.resources.SwaggerResource;
 import com.baremaps.ogcapi.resources.TilesetsResource;
 import com.baremaps.postgres.jdbc.PostgresUtils;
 import com.baremaps.server.CorsFilter;
+import com.baremaps.studio.resources.StudioResource;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonGenerator.Feature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -90,7 +91,8 @@ public class OpenApi implements Callable<Integer> {
                 ConformanceResource.class,
                 CollectionsResource.class,
                 StylesResource.class,
-                TilesetsResource.class)
+                TilesetsResource.class,
+                StudioResource.class)
             .register(new ApiResource("studio-openapi.yaml"))
             .register(contextResolverFor(mapper))
             .register(

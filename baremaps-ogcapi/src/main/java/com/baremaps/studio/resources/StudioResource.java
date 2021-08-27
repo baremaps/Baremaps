@@ -85,7 +85,7 @@ public class StudioResource {
                 .bindByType("entity", entity, ENTITY)
                 .bind("kind", kind)
                 .execute());
-    return Response.created(URI.create("maps/" + id)).build();
+    return Response.created(URI.create("studio/" + kind + "/" + id)).build();
   }
 
   @GET

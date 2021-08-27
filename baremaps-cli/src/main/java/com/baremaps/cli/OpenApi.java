@@ -16,6 +16,7 @@ package com.baremaps.cli;
 
 import static io.servicetalk.data.jackson.jersey.ServiceTalkJacksonSerializerFeature.contextResolverFor;
 
+import com.baremaps.openapi.BaseUriRequestFilter;
 import com.baremaps.openapi.resources.ApiListingResource;
 import com.baremaps.openapi.resources.CollectionsService;
 import com.baremaps.openapi.resources.ConformanceService;
@@ -88,6 +89,7 @@ public class OpenApi implements Callable<Integer> {
                 SwaggerResource.class,
                 RootService.class,
                 CorsFilter.class,
+                BaseUriRequestFilter.class,
                 ConformanceService.class,
                 CollectionsService.class,
                 StylesService.class,

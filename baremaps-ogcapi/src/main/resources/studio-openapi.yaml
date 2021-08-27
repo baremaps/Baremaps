@@ -4,7 +4,7 @@ info:
   description: Draft for a Baremaps API.
   version: ${project.version}
 servers:
-  - url: 'http://localhost:8080/studio'
+  - url: 'http://localhost:8080'
 tags:
   - name: Capabilities
     description: Information about this API
@@ -14,8 +14,8 @@ tags:
     description: Discover, create, fetch, update and delete styles
   - name: Tilesets
     description: Discover, create, fetch, update and delete tilesets
-  - name: Maps
-    description: Discover, create, fetch, update and delete maps
+  - name: Entities
+    description: Discover, create, fetch, update and delete studio entities
 paths:
   '/':
     get:
@@ -575,23 +575,25 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/exception'
-  /maps:
+  /studio/{entitiesKind}:
     get:
       tags:
-        - Maps
-      summary: the maps metadata
+        - Entities
+      summary: the entities
       description: A list of all maps metadata available.
-      operationId: getMaps
+      operationId: getEntities
+      parameters:
+        - $ref: '#/components/parameters/entitiesKind'
       responses:
         "200":
           description: |-
-            The maps shared by this API.
-            This response can be references directly for every service that wants only essential information at the maps level. /maps/mapId might return more information.
-            This resource provides information about and how to access the maps.
+            The entities of a certain kind shared by this API.
+            This response can be references directly for every service that wants only essential information at the maps level. /{entitiesType}/entityId might return more information.
+            This resource provides information about and how to access the entities.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/maps-metadata'
+                $ref: '#/components/schemas/entities'
         "500":
           description: A server error occurred
           content:
@@ -600,111 +602,113 @@ paths:
                 $ref: '#/components/schemas/exception'
     post:
       tags:
-        - Maps
+        - Entities
       summary: |-
-        adds a new map
-      operationId: addMap
+        adds a new entity
+      operationId: addEntity
+      parameters:
+        - $ref: '#/components/parameters/entitiesKind'
       description: |-
-        Adds a map to the map repository.
+        Adds a entity to the entity repository.
 
-        In case, a new map is created, the following rules
+        In case, a new entity is created, the following rules
         apply.
 
-        If the map submitted in the request body includes an
-        identifier, that identifier will be used. If a map with that identifier
+        If the entity submitted in the request body includes an
+        identifier, that identifier will be used. If an entity with that identifier
         already exists, an error is returned.
 
         If no identifier can be determined from the submitted
-        map, the server will assign a new identifier to the
-        map.
+        entity, the server will assign a new identifier to the
+        entity.
 
-        The URI of the new map is returned in the header
+        The URI of the new entity is returned in the header
         `Location`.
       responses:
         '201':
           description: |-
-            map created
+            entity created
           headers:
             Location:
               schema:
                 type: string
               description: |-
-                URI of the new map
+                URI of the new entity
         '409':
           description: |-
-            a map with that id already exists
+            an entity with that id already exists
       requestBody:
         description: |-
-          Map to be added
+          Entity to be added
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/map-metadata'
-  /maps/{mapId}:
+              $ref: '#/components/schemas/entity'
+  /studio/{entitiesKind}/{entityId}:
     get:
       tags:
-        - Maps
+        - Entities
       summary: |-
-        fetch a map by id
+        fetch an entity by id
       description: |-
-        Fetches the map with identifier `mapId`. The set of
-        available maps can be retrieved at `/maps`.
-      operationId: getMap
+        Fetches the entity with identifier `entityId`. The set of
+        available entities can be retrieved at `/{entitiesKind}`.
+      operationId: getEntity
       parameters:
-        - $ref: '#/components/parameters/mapId'
+        - $ref: '#/components/parameters/entityId'
+        - $ref: '#/components/parameters/entitiesKind'
       responses:
         '200':
           description: |-
-            The map
+            The entity
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/map-metadata'
+                $ref: '#/components/schemas/entity'
         '404':
           description: |-
-            map not found
+            entity not found
     put:
       tags:
-        - Maps
+        - Entities
       summary: |-
-        replace a map or add a new map
+        replace an entity
       description: |-
-        Replace an existing map with the id `mapId`. If no
-        such map exists, a new map with that id is added.
-      operationId: updateMap
+        Replace an existing entity with the id `entityId`.
+      operationId: updateEntity
       parameters:
-        - $ref: '#/components/parameters/mapId'
+        - $ref: '#/components/parameters/entityId'
+        - $ref: '#/components/parameters/entitiesKind'
       requestBody:
         description: |-
-          A single map.
+          A single entity.
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/map-metadata'
+              $ref: '#/components/schemas/entity'
       responses:
         '204':
           description: |-
-            map updated or created successfully
+            entity updated or created successfully
     delete:
       tags:
-        - Maps
+        - Entities
       summary: |-
-        delete a map
+        delete an entity
       description: |-
-        Delete an existing map with the id `mapId`. If no
-        such map exists, an error is returned.
-
-        Deletes any data/itmes associated to this map.
+        Delete an existing entity with the id `entityId`. If no
+        such entity exists, an error is returned.
       operationId: deleteMap
       parameters:
-        - $ref: '#/components/parameters/mapId'
+        - $ref: '#/components/parameters/entityId'
+        - $ref: '#/components/parameters/entitiesKind'
       responses:
         '204':
           description: |-
-            map deleted
+            entity deleted
         '404':
           description: |-
-            map not found
+            entity not found
 components:
   parameters:
     collectionId:
@@ -737,17 +741,27 @@ components:
       schema:
         type: string
         format: uuid
-    mapId:
-      name: mapId
+    entityId:
+      name: entityId
       in: path
       description: |-
-        Local identifier of a map. \
-        A list of all available maps can be found
-        under the /maps path.
+        Local identifier of an entity. \
+        A list of all available entities can be found
+        under the /{entitiesType} path.
       required: true
       schema:
         type: string
         format: uuid
+    entitiesKind:
+      name: entitiesKind
+      in: path
+      description: |-
+        Local identifier of an entity kind. \
+        A list of all available entities can be found
+        under the /{entitiesKind} path.
+      required: true
+      schema:
+        type: string
   schemas:
     collection:
       type: object
@@ -817,6 +831,20 @@ components:
           type: array
           items:
             type: string
+    entity:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          description: identifier of the entity used, for example, in URIs
+          type: string
+          format: uuid
+      additionalProperties: { }
+    entities:
+      type: array
+      items:
+        $ref: '#/components/schemas/entity'
     exception:
       type: object
       required:
@@ -975,41 +1003,6 @@ components:
           example: Trierer Strasse 70, 53115 Bonn
         length:
           type: integer
-    map-metadata:
-      type: object
-      required:
-        - id
-      properties:
-        id:
-          description: identifier of the map used, for example, in URIs
-          type: string
-          format: uuid
-        title:
-          description: human readable title of the map
-          type:
-            string
-        style:
-          description: id/reference to the style used in the map
-          type: string
-        tileset:
-          description: id/reference to the tileset used in the map
-          type: string
-        last-edit:
-          description: date of the last edit of the map
-          type: string
-        publication-scope:
-          description: indication if its a private or published map
-          type: string
-        views:
-          description: count of map views
-          type: integer
-    maps-metadata:
-      type: object
-      properties:
-        maps-metadata:
-          type: array
-          items:
-            $ref: '#components/schemas/map-metadata'
     mb-style:
       required:
         - layers
@@ -1036,7 +1029,7 @@ components:
                 example: 'https://services.interactive-instruments.de/vtp/daraa/tiles/default/{z}/{y}/{x}?f=mvt'
         sprite:
           type: string
-          example: 'http://vtp2018.s3-eu-west-1.amazonaws.com/static/mapstorestyle/sprites/sprites'
+          example: 'http://vtp2018.s3-eu-west-1.amazonaws.com/static/{entitiesType}torestyle/sprites/sprites'
         glyphs:
           type: string
           example: 'http://fonts.openmaptiles.org/{fontstack}/{range}.pbf'

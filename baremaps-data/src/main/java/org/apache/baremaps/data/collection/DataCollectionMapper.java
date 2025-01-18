@@ -18,6 +18,7 @@
 package org.apache.baremaps.data.collection;
 
 
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.function.Function;
 
@@ -57,5 +58,10 @@ public class DataCollectionMapper<S, T> implements DataCollection<T> {
   @Override
   public void clear() {
     collection.clear();
+  }
+
+  @Override
+  public void close() throws IOException {
+    collection.close();
   }
 }

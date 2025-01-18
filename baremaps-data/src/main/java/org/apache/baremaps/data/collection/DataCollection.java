@@ -17,6 +17,7 @@
 
 package org.apache.baremaps.data.collection;
 
+import java.io.Closeable;
 import java.util.*;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
@@ -25,7 +26,7 @@ import java.util.stream.StreamSupport;
  * A {@code DataCollection<E>} is a group of elements that can be iterated over. It is similar to a
  * {@link java.util.Collection<E> Collection}, but can hold up to {@link Long#MAX_VALUE} elements.
  */
-public interface DataCollection<E> extends Iterable<E> {
+public interface DataCollection<E> extends Iterable<E>, Closeable {
 
   /**
    * Returns the number of values stored in the data collection.

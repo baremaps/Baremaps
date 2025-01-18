@@ -17,6 +17,8 @@
 
 package org.apache.baremaps.data.collection;
 
+import java.io.Closeable;
+import java.io.IOException;
 import java.util.*;
 import java.util.Map.Entry;
 
@@ -163,6 +165,13 @@ public class DataConversions {
     public Iterator<E> iterator() {
       return collection.iterator();
     }
+
+    @Override
+    public void close() throws IOException {
+        if (collection instanceof Closeable closeable) {
+          closeable.close();
+        }
+    }
   }
 
   private static class ListAdapter<E> extends AbstractList<E> {
@@ -250,6 +259,13 @@ public class DataConversions {
     @Override
     public int hashCode() {
       return list.hashCode();
+    }
+
+    @Override
+    public void close() throws IOException {
+        if (list instanceof Closeable closeable) {
+          closeable.close();
+        }
     }
   }
 

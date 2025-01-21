@@ -168,9 +168,9 @@ public class DataConversions {
 
     @Override
     public void close() throws IOException {
-        if (collection instanceof Closeable closeable) {
-          closeable.close();
-        }
+      if (collection instanceof Closeable closeable) {
+        closeable.close();
+      }
     }
   }
 
@@ -263,9 +263,9 @@ public class DataConversions {
 
     @Override
     public void close() throws IOException {
-        if (list instanceof Closeable closeable) {
-          closeable.close();
-        }
+      if (list instanceof Closeable closeable) {
+        closeable.close();
+      }
     }
   }
 

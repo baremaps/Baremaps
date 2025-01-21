@@ -19,6 +19,7 @@ package org.apache.baremaps.data.collection;
 
 
 
+import java.io.IOException;
 import org.apache.baremaps.data.type.LongDataType;
 
 /**
@@ -85,5 +86,11 @@ public class IndexedDataList<E> implements DataList<E> {
   public void clear() {
     index.clear();
     values.clear();
+  }
+
+  @Override
+  public void close() throws IOException {
+    index.close();
+    values.close();
   }
 }

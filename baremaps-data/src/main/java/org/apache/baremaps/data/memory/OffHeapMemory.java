@@ -36,13 +36,19 @@ public class OffHeapMemory extends Memory<ByteBuffer> {
    * @param segmentSize the size of the segments in bytes
    */
   public OffHeapMemory(int segmentSize) {
-    super(segmentSize);
+    super(1024, segmentSize);
   }
 
   /** {@inheritDoc} */
   @Override
-  protected ByteBuffer allocate(int index, int size) {
-    return ByteBuffer.allocateDirect(size);
+  protected ByteBuffer allocateHeader() {
+    return ByteBuffer.allocateDirect(headerSize());
+  }
+
+  /** {@inheritDoc} */
+  @Override
+  protected ByteBuffer allocateSegment(int index) {
+    return ByteBuffer.allocateDirect(segmentSize());
   }
 
   /** {@inheritDoc} */

@@ -25,12 +25,12 @@ package org.apache.baremaps.calcite;
 // import org.apache.baremaps.data.calcite.BaremapsTable;
 // import org.apache.baremaps.data.collection.AppendOnlyLog;
 // import org.apache.baremaps.data.collection.IndexedDataList;
-// import org.apache.baremaps.data.store.DataTableImpl;
-// import org.apache.baremaps.data.type.DataTypeImpl;
+// import org.apache.baremaps.calcite.data.DataTableImpl;
+// import org.apache.baremaps.calcite.data.DataTypeImpl;
 // import org.apache.baremaps.maplibre.vectortile.VectorTileFunctions;
 // import org.apache.baremaps.store.*;
-// import org.apache.baremaps.store.DataColumn.Cardinality;
-// import org.apache.baremaps.store.DataColumn.Type;
+// import org.apache.baremaps.calcite.DataColumn.Cardinality;
+// import org.apache.baremaps.calcite.DataColumn.Type;
 // import org.apache.calcite.jdbc.CalciteConnection;
 // import org.apache.calcite.model.ModelHandler;
 // import org.apache.calcite.runtime.AccumOperation;
@@ -81,9 +81,9 @@ class CalciteTest {
   // DataTable cityDataTable = new DataTableImpl(
   // cityRowType,
   // new IndexedDataList<>(new AppendOnlyLog<>(new DataTypeImpl(cityRowType))));
-  // cityDataTable.add(new DataRowImpl(cityDataTable.schema(),
+  // cityDataTable.add(new DataRow(cityDataTable.schema(),
   // List.of(1, "Paris", geometryFactory.createPoint(new Coordinate(2.3522, 48.8566)))));
-  // cityDataTable.add(new DataRowImpl(cityDataTable.schema(),
+  // cityDataTable.add(new DataRow(cityDataTable.schema(),
   // List.of(2, "New York", geometryFactory.createPoint(new Coordinate(-74.0060, 40.7128)))));
   // BaremapsTable cityBaremapsTable = new BaremapsTable(cityDataTable);
   // rootSchema.add("city", cityBaremapsTable);
@@ -96,9 +96,9 @@ class CalciteTest {
   // populationRowType,
   // new IndexedDataList<>(new AppendOnlyLog<>(new DataTypeImpl(populationRowType))));
   // populationDataTable
-  // .add(new DataRowImpl(populationDataTable.schema(), List.of(1, 2_161_000)));
+  // .add(new DataRow(populationDataTable.schema(), List.of(1, 2_161_000)));
   // populationDataTable
-  // .add(new DataRowImpl(populationDataTable.schema(), List.of(2, 8_336_000)));
+  // .add(new DataRow(populationDataTable.schema(), List.of(2, 8_336_000)));
   // BaremapsTable populationBaremapsTable = new BaremapsTable(populationDataTable);
   // rootSchema.add("population", populationBaremapsTable);
   //

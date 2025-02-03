@@ -37,10 +37,10 @@ class AppendOnlyLogTest {
   void addFixedSizeData() {
     var collection = new AppendOnlyLog<>(new IntegerDataType(), new OffHeapMemory(1 << 10));
     for (int i = 0; i < 1 << 20; i++) {
-      assertEquals(Long.BYTES + (i << 2), collection.addPositioned(i));
+      assertEquals((i << 2), collection.addPositioned(i));
     }
     for (int i = 0; i < 1 << 20; i++) {
-      assertEquals(i, collection.getPositioned(Long.BYTES + (i << 2)));
+      assertEquals(i, collection.getPositioned((i << 2)));
     }
   }
 

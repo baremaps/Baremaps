@@ -48,7 +48,7 @@ limitations under the License.
     </dependency>
     <dependency>
       <groupId>org.apache.baremaps</groupId>
-      <artifactId>baremaps-csv</artifactId>
+      <artifactId>baremaps-calcite</artifactId>
     </dependency>
     <dependency>
       <groupId>org.apache.baremaps</groupId>
@@ -61,10 +61,6 @@ limitations under the License.
     <dependency>
       <groupId>org.apache.baremaps</groupId>
       <artifactId>baremaps-flatgeobuf</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.baremaps</groupId>
-      <artifactId>baremaps-geopackage</artifactId>
     </dependency>
     <dependency>
       <groupId>org.apache.baremaps</groupId>

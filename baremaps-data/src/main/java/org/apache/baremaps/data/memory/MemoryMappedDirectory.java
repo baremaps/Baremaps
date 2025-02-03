@@ -50,10 +50,10 @@ public class MemoryMappedDirectory extends Memory<MappedByteBuffer> {
    * Constructs an {@link MemoryMappedDirectory} with a custom directory and a custom segment size.
    *
    * @param directory the directory that stores the data
-   * @param segmentBytes the size of the segments in bytes
+   * @param segmentSize the size of the segments in bytes
    */
-  public MemoryMappedDirectory(Path directory, int segmentBytes) {
-    super(1024, segmentBytes);
+  public MemoryMappedDirectory(Path directory, int segmentSize) {
+    super(1 << 14, segmentSize);
     this.directory = directory;
   }
 
@@ -62,8 +62,8 @@ public class MemoryMappedDirectory extends Memory<MappedByteBuffer> {
     try {
       Path file = directory.resolve("header");
       try (FileChannel channel = FileChannel.open(file, StandardOpenOption.CREATE,
-              StandardOpenOption.READ, StandardOpenOption.WRITE)) {
-        return channel.map(MapMode.READ_WRITE, 0, 1024);
+          StandardOpenOption.READ, StandardOpenOption.WRITE)) {
+        return channel.map(MapMode.READ_WRITE, 0, headerSize());
       }
     } catch (IOException e) {
       throw new MemoryException(e);
